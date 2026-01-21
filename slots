@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<title>Kyriakopoulos Slots Club</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #ff8c00, #ffb347);
+        color: #fff;
+        text-align: center;
+    }
+
+    header {
+        padding: 25px;
+        background: #1a1a1a;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 42px;
+        color: #b84cff;
+        letter-spacing: 2px;
+    }
+
+    .slot-container {
+        margin-top: 60px;
+    }
+
+    .slot-box {
+        background: #2b2b2b;
+        display: inline-block;
+        padding: 30px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    .slot-title {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #ffa500;
+    }
+
+    .reels {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        font-size: 60px;
+        margin-bottom: 20px;
+    }
+
+    .reel {
+        background: #111;
+        padding: 20px 25px;
+        border-radius: 12px;
+        min-width: 80px;
+    }
+
+    button {
+        background: linear-gradient(180deg, #ff9800, #ff6f00);
+        border: none;
+        color: white;
+        font-size: 22px;
+        padding: 15px 40px;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+        transition: transform 0.1s;
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 22px;
+        font-weight: bold;
+        min-height: 30px;
+    }
+
+    .win {
+        color: #00ff99;
+    }
+
+    .lose {
+        color: #ff4d4d;
+    }
+
+    footer {
+        margin-top: 80px;
+        padding: 15px;
+        background: #111;
+        font-size: 14px;
+        color: #ccc;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Kyriakopoulos Slots Club</h1>
+</header>
+
+<div class="slot-container">
+    <div class="slot-box">
+        <div class="slot-title">🎰 Slot 1</div>
+
+        <div class="reels">
+            <div class="reel" id="r1">🍒</div>
+            <div class="reel" id="r2">🍋</div>
+            <div class="reel" id="r3">🔔</div>
+        </div>
+
+        <button onclick="spin()">Έναρξη</button>
+
+        <div class="message" id="message"></div>
+    </div>
+</div>
+
+<footer>
+    © 2026 Kyriakopoulos Slots Club
+</footer>
+
+<script>
+    const symbols = ["🍒", "🍋", "🍉", "🔔", "⭐", "7️⃣"];
+
+    function spin() {
+        const msg = document.getElementById("message");
+        msg.textContent = "";
+        msg.className = "message";
+
+        let spins = 15;
+        let interval = setInterval(() => {
+            document.getElementById("r1").textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            document.getElementById("r2").textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            document.getElementById("r3").textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            spins--;
+
+            if (spins <= 0) {
+                clearInterval(interval);
+
+                const r1 = document.getElementById("r1").textContent;
+                const r2 = document.getElementById("r2").textContent;
+                const r3 = document.getElementById("r3").textContent;
+
+                if (r1 === r2 && r2 === r3) {
+                    msg.textContent = "🎉 ΣΥΓΧΑΡΗΤΗΡΙΑ! ΚΕΡΔΙΣΕΣ! 🎉";
+                    msg.classList.add("win");
+                } else {
+                    msg.textContent = "❌ ΔΟΚΙΜΑΣΕ ΞΑΝΑ!";
+                    msg.classList.add("lose");
+                }
+            }
+        }, 100);
+    }
+</script>
+
+</body>
+</html>
